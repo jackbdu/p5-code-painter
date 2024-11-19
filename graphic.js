@@ -30,29 +30,29 @@ class Graphic {
     // update with user defined properties
     Object.assign(this.properties, properties);
 
-    if (this.properties.vertices.length < 2 && this.properties.type === "line") {
+    if (this.properties.vertices.length < 2 && this.properties.type.includes("line")) {
       this.properties.vertices = [this.properties.p5.createVector(-0.5, -0.5), this.properties.p5.createVector(0.5, 0.5)];
-    } else if (this.properties.vertices.length < 4 && (this.properties.type === "rect" || this.properties.type === "ellipse" || this.properties.type === "select")) {
+    } else if (this.properties.vertices.length < 4 && (this.properties.type.includes("rect") || this.properties.type.includes("ellipse") || this.properties.type.includes("select"))) {
       this.properties.vertices = [this.properties.p5.createVector(-0.5, -0.5), this.properties.p5.createVector(0.5, -0.5), this.properties.p5.createVector(0.5, 0.5), this.properties.p5.createVector(-0.5, 0.5)];
     }
 
-    if (this.properties.type === "select") {
+    if (this.properties.type.includes("select")) {
       if (this.properties.stroke === null) this.properties.stroke = this.properties.p5.color(100);
       if (this.properties.strokeWeight === null) this.properties.strokeWeight = 1;
-    } else if (this.properties.type === "rect" || this.properties.type === "group") {
+    } else if (this.properties.type.includes("rect") || this.properties.type.includes("group")) {
       this.minCornerControlPointRadius = 20;
     }
 
     this.spreadProperties();
 
     this.isComplete = true;
-    if (this.type === "bezier" && this.vertices.length < 4) {
+    if (this.type.includes("bezier") && this.vertices.length < 4) {
       this.isComplete = false;
     }
 
     this.statements = this.initStatements();
 
-    if (this.properties.vertices.length < 1 && (this.type === "brush" || this.type === "bezier")) {
+    if (this.properties.vertices.length < 1 && (this.type.includes("brush") || this.type.includes("bezier"))) {
       this.addVertex(this.x, this.y);
     }
   }
@@ -165,7 +165,7 @@ class Graphic {
   // returns a parameters object containing all parameters
   getParameters(type) {
     let p = {};
-    if (type === "rect") {
+    if (type.includes("rect")) {
       let smallerSide = Math.abs(this.w) > Math.abs(this.h) ? Math.abs(this.h) : Math.abs(this.w);
       let maxRadius = smallerSide / 2;
       p = {
@@ -178,28 +178,28 @@ class Graphic {
         bl: this.cornerRadii[2] > maxRadius ? maxRadius : this.cornerRadii[2],
         br: this.cornerRadii[3] > maxRadius ? maxRadius : this.cornerRadii[3],
       };
-    } else if (type === "select") {
+    } else if (type.includes("select")) {
       p = {
         x: this.x + this.w * this.vertices[0].x,
         y: this.y + this.h * this.vertices[0].y,
         w: this.w,
         h: this.h,
       };
-    } else if (type === "ellipse") {
+    } else if (type.includes("ellipse")) {
       p = {
         x: this.x,
         y: this.y,
         w: this.w,
         h: this.h,
       };
-    } else if (type === "line") {
+    } else if (type.includes("line")) {
       p = {
         x1: this.x - this.w / 2,
         y1: this.y - this.h / 2,
         x2: this.x + this.w / 2,
         y2: this.y + this.h / 2,
       };
-    } else if (type === "brush") {
+    } else if (type.includes("brush")) {
       p = {};
       for (let i = 0; i < this.vertices.length; i++) {
         p[`x${i}`] = this.x + this.vertices[i].x * this.w;
@@ -210,7 +210,7 @@ class Graphic {
           p[`y${i + 1}`] = p[`y${i}`];
         }
       }
-    } else if (type === "bezier") {
+    } else if (type.includes("bezier")) {
       let l = this.vertices.length;
       if (l > 0) {
         p = {
@@ -240,7 +240,7 @@ class Graphic {
     // this and display should share exact same values
     let statement = "";
     let p = this.getParameters(this.type);
-    if (this.type === "rect") {
+    if (this.type.includes("rect")) {
       if (this.w === this.h) {
         statement = `square(${p.x},${p.y},${p.w}`;
       } else {
@@ -252,15 +252,15 @@ class Graphic {
         statement += `,${p.tl},${p.tr},${p.br},${p.bl}`;
       }
       statement += `);`;
-    } else if (this.type === "ellipse") {
+    } else if (this.type.includes("ellipse")) {
       if (this.w === this.h) {
         statement = `circle(${p.x},${p.y},${p.w});`;
       } else {
         statement = `ellipse(${p.x},${p.y},${p.w},${p.h});`;
       }
-    } else if (this.type === "line") {
+    } else if (this.type.includes("line")) {
       statement = `line(${p.x1},${p.y1},${p.x2},${p.y2});`;
-    } else if (this.type === "brush") {
+    } else if (this.type.includes("brush")) {
       statement = `beginShape();\n`;
       for (let i = 0; i < Object.keys(p).length / 2; i++) {
         let x = p[`x${i}`];
@@ -268,7 +268,7 @@ class Graphic {
         statement += `vertex(${x},${y});\n`;
       }
       statement += `endShape();`;
-    } else if (this.type === "bezier") {
+    } else if (this.type.includes("bezier")) {
       if (Object.keys(p).length > 0) {
         statement = `bezier(`;
         for (let i = 0; i < Object.keys(p).length / 2; i++) {
@@ -541,9 +541,9 @@ class Graphic {
     // relative to center corner as origin
     let relativeX = this.w === 0 ? 0 : (x - this.x) / this.w;
     let relativeY = this.h === 0 ? 0 : (y - this.y) / this.h;
-    if (this.type === "brush" || this.type === "group") {
+    if (this.type.includes("brush") || this.type.includes("group")) {
       this.vertices.push(this.p5.createVector(relativeX, relativeY));
-    } else if (this.type === "bezier") {
+    } else if (this.type.includes("bezier")) {
       this.vertices.push(this.p5.createVector(relativeX, relativeY));
       this.vertices.push(this.p5.createVector(relativeX, relativeY));
       if (this.vertices.length >= 4) {
@@ -570,14 +570,14 @@ class Graphic {
     // top left 0, top right 1, bottom right 2, bottom left 3
 
     if (this.isEditable === false) {
-      if (this.type === "brush") {
+      if (this.type.includes("brush")) {
         let minDistance = 1;
         let lastVtx = this.vertices[this.vertices.length - 1];
         if (this.p5.dist(lastVtx.x * this.w + this.x, lastVtx.y * this.h + this.y, x, y) > minDistance) {
           this.addVertex(x, y);
         }
         this.isComplete = true;
-      } else if (this.type === "bezier") {
+      } else if (this.type.includes("bezier")) {
         let v = this.p5.createVector(x, y);
         // either update the first or second control point
         this.updateVertex(x, y, this.vertices.length < 3 ? 1 : 2);
@@ -587,7 +587,7 @@ class Graphic {
         let dimension = this.p5.createVector(x - this.x + this.w * 0.5, y - this.y + this.h * 0.5);
         // print(v);
         if (shiftIsDown) {
-          if (this.type === "line") {
+          if (this.type.includes("line")) {
             // round up to integers
             // 24 is the number of even angles to split TWO_PI
             dimension.setHeading((this.p5.TWO_PI / 24) * this.p5.floor((dimension.heading() / this.p5.TWO_PI) * 24 + 0.5));
@@ -641,21 +641,21 @@ class Graphic {
       }
     }
     // selection box
-    if (this.type === "select") {
+    if (this.type.includes("select")) {
       this.p5.rectMode(this.mode || this.p5.CORNER);
       this.p5.rect(p.x, p.y, p.w, p.h);
-    } else if (this.type === "rect") {
+    } else if (this.type.includes("rect")) {
       this.p5.rectMode(this.mode || this.p5.CORNER);
       // parameters
       this.p5.rect(p.x, p.y, p.w, p.h, p.tl, p.tr, p.br, p.bl);
-    } else if (this.type === "ellipse") {
+    } else if (this.type.includes("ellipse")) {
       this.p5.ellipseMode(this.mode || this.p5.CENTER);
       this.p5.ellipse(p.x, p.y, p.w, p.h);
-    } else if (this.type === "line") {
+    } else if (this.type.includes("line")) {
       this.p5.line(p.x1, p.y1, p.x2, p.y2);
-    } else if (this.type === "bezier") {
+    } else if (this.type.includes("bezier")) {
       this.p5.bezier(p.x0, p.y0, p.x1, p.y1, p.x2, p.y2, p.x3, p.y3);
-    } else if (this.type === "brush") {
+    } else if (this.type.includes("brush")) {
       this.p5.beginShape();
       for (let i = 0; i < Object.keys(p).length / 2; i++) {
         this.p5.vertex(p[`x${i}`], p[`y${i}`]);
@@ -690,7 +690,7 @@ class GraphicGroup extends Graphic {
       cornerRadii: [], // only for rectangles
     };
     // if there's only one rectange within group
-    if (indexes.length === 1 && graphics[indexes[0]].type === "rect") {
+    if (indexes.length === 1 && graphics[indexes[0]].type.includes("rect")) {
       groupProperties.cornerRadii = graphics[indexes[0]].cornerRadii;
     }
     super(groupProperties);
@@ -767,7 +767,7 @@ class GraphicGroup extends Graphic {
 
   getParameters(type) {
     let p = {};
-    if (type === "group") {
+    if (type.includes("group")) {
       p = {
         x: this.x,
         y: this.y,
@@ -841,7 +841,7 @@ class GraphicGroup extends Graphic {
 
   display(graphics) {
     let p = this.getParameters(this.type);
-    if (this.type === "group") {
+    if (this.type.includes("group")) {
       this.p5.noFill();
       this.p5.stroke(80, 160, 255);
       this.p5.strokeWeight(1);

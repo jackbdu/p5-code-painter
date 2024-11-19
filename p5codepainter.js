@@ -16,7 +16,7 @@ class P5CodePainter {
     // only add this to graphics after being created
     this.activeGraphicIndex = null; // graphic in the process of being created
 
-    this.tools = ["rect", "ellipse", "line", "bezier", "brush", "select"];
+    this.tools = ["rect (R)", "ellipse (E)", "line (L)", "bezier (C)", "brush (B)", "select (V)"];
 
     //    this.cursors = ['auto', 'crosshair', 'nwse-resize', 'ns-resize', 'nesw-resize', 'ew-resize', 'move', 'grab', 'grabbing'];
     //    this.activeCursorIndex = 0;
@@ -420,7 +420,7 @@ class P5CodePainter {
           this.graphics[this.activeGraphicIndex].setFill(this.settings.fill);
           this.graphics[this.activeGraphicIndex].setStrokeWeight(this.settings.strokeWeight);
           this.code.push(this.graphics[this.activeGraphicIndex].statements);
-        } else if (this.tools[this.settings.activeToolIndex] === "select") {
+        } else if (this.tools[this.settings.activeToolIndex].includes("select")) {
           let selectedIndex = null;
           // start from last graphic (top layer)
           for (let i = this.graphics.length - 1; i > -1; i--) {
