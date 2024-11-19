@@ -121,12 +121,14 @@ export default {
           this.pcp.copy();
           this.pcp.paste(this.pcp.settings.pasteOffset.x, this.pcp.settings.pasteOffset.y);
         } else if (evt.code === "KeyZ" && evt.shiftKey) {
+          evt.preventDefault();
           this.pcp.redo();
         } else if (evt.code === "KeyZ") {
+          evt.preventDefault();
           this.pcp.undo();
         } else if (evt.code === "KeyA") {
-          this.pcp.selectAllGraphics();
           evt.preventDefault();
+          this.pcp.selectAllGraphics();
         }
         // to be added later, must not be typing (aka, only do this when canvas is active, rather than text editor for instance)
       } else if (evt.code === "KeyV") {
