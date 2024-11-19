@@ -100,7 +100,7 @@ div#instructions {
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100%;
+  width: 60%;
   box-sizing: border-box;
   padding: 0.5em;
   z-index: 100;
