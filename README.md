@@ -2,7 +2,7 @@
 
 [ [Try p5.js Code Painter](https://jackbdu.com/p5-code-painter/) ]
 
-A web-based experimental painting app that translates your painting into its underlying p5.js code.
+A web-based experimental painting app that translates your painting into p5.js code in real time.
 
 ## Video Demos
 
