@@ -20,7 +20,7 @@ export default {
     window.addEventListener("mousedown", this.handleMouseDown);
     window.addEventListener("mouseup", this.handleMouseUp);
     window.addEventListener("mousemove", this.handleMouseMove);
-    this.pcp = new P5CodePainter(256, 512, p5);
+    this.pcp = new P5CodePainter(2048, 2048, p5);
     this.setActiveToolIndex(0);
     this.tools = this.pcp.tools;
     this.code = this.pcp.getCodeString();
@@ -126,6 +126,7 @@ export default {
           this.pcp.undo();
         } else if (evt.code === "KeyA") {
           this.pcp.selectAllGraphics();
+          evt.preventDefault();
         }
         // to be added later, must not be typing (aka, only do this when canvas is active, rather than text editor for instance)
       } else if (evt.code === "KeyV") {
