@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+    -->
+    <link rel="stylesheet" href="lib/reset.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+
+  </head>
+  <body>
+    <div id="app" >
+    </div>
+    <script src="lib/p5.js"></script>
+    <script src="graphic.js"></script>
+    <script src="p5codepainter.js"></script>
+    <!--
+    <script type="importmap">
+      {
+        "imports": {
+          "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+        }
+      }
+      {
+    </script>
+    -->
+    <script type="importmap">
+      {
+        "imports": {
+          "vue": "./lib/vue.esm-browser.js"
+        }
+      }
+    </script>
+    <script type="module">
+      import { createApp } from 'vue';
+      import App from './app.js'
+
+      window.addEventListener('load', () => {
+        createApp(App).mount('#app');
+      });
+    </script>
+  </body>
+</html>
