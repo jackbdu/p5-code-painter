@@ -118,6 +118,7 @@ ul#tools {
 
 button.tool {
   width: 100%;
+  font-family: Ubuntu, sans-serif;
 }
 
 button.tool.active {
