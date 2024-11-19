@@ -224,7 +224,7 @@ class P5CodePainter {
               continue;
             }
           }
-          stringifiedCode += this.code[i][j] + "\n";
+          stringifiedCode += "  " + this.code[i][j] + "\n";
         }
       }
     }

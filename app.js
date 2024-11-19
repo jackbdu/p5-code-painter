@@ -250,6 +250,6 @@ export default {
           @mouseout="hideStrokeWeightSlider = true"
           @input="event => setStrokeWeight(event.target.value, 'strokeWeight')">
     </div>
-    <textarea ref="editor" id="editor">function setup() {\ncreateCanvas({{this.pcp.width}},{{this.pcp.height}});\n{{ code }}}</textarea>
+    <textarea ref="editor" id="editor">function setup() {\n  createCanvas({{this.pcp.width}},{{this.pcp.height}});\n{{ code }}}</textarea>
   `,
 };
