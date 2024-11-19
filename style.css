@@ -141,7 +141,7 @@ div#settings {
   position: absolute;
   left: 0;
   top: 0;
-  width: 100%;
+  width: 5em;
   height: 5em;
 }
 
@@ -154,10 +154,12 @@ div#settings div#color-pickers {
 }
 
 div#settings input {
+  background-color: transparent;
   position: absolute;
   margin: 0;
   padding: 0;
   border: 0;
+  box-shadow: none;
 }
 
 div#settings input#bg-picker {
@@ -186,10 +188,9 @@ div#settings input#fl-picker {
 
 div#settings input#sw-slider {
   top: 50%;
-  left: 5em;
+  left: 7em;
   transform: translate(0, -50%);
-  width: calc(45% - 5em);
-  margin-left: 2.5%;
+  width: 10em;
 }
 
 div#settings input#sw-slider.hide {
