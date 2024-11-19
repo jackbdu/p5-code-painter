@@ -217,6 +217,11 @@ export default {
             @click="setActiveToolIndex(index)">{{ tool }}</button>
       </li>
     </ul>
+    <div id="instructions">
+      <p>p5.js Code Painter by <a href="https://jackbdu.com/about/" target="_blank">Jack B. Du</a>. This is an experimental painting app that translates your painting into p5.js code.</p>
+      <p>Shortcuts: Ctrl/⌘ + X (Cut), Ctrl/⌘ + C (Copy), Ctrl/⌘ + V (Paste), Ctrl/⌘ + D (Duplicate), Ctrl/⌘ + Z (Undo), Ctrl/⌘ + ⇧ + Z (Redo), Ctrl/⌘ + A (Select All), Backspace (Remove Selection), Arrow Keys (Move Selection)</p>
+      <p>To run your code, copy entire code in the text area, paste it between the curly braces "{}" that comes after draw() in <a href="https://editor.p5js.org/" target="_blank">p5.js Web Editor</a>, and finally, click the play button to see the results.</p>
+    </div>
     <div id='settings'>
       <div id='color-pickers'>
         <input

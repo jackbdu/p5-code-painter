@@ -92,6 +92,23 @@ div#p5sketch svg#bounding-box-wrapper rect.right.center {
   cursor: ew-resize;
 }
 
+div#instructions {
+  font-family: sans-serif;
+  border-top: 1px solid darkgray;
+  line-height: 1.5em;
+  background: #fff;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.5em;
+  z-index: 100;
+}
+div#instructions a {
+  color: #000;
+}
+
 ul#tools {
   position: absolute;
   top: 5em;
