@@ -218,7 +218,7 @@ export default {
       </li>
     </ul>
     <div id="instructions">
-      <p>p5.js Code Painter by <a href="https://jackbdu.com/about/" target="_blank">Jack B. Du</a>. This is an experimental painting app that translates your painting into p5.js code. Only desktop browsers are supported.</p>
+      <p>p5.js Code Painter by <a href="https://jackbdu.com/about/" target="_blank">Jack B. Du</a>. Source code available on <a href="https://github.com/jackbdu/p5-code-painter" target="_blank">GitHub</a>. This is an experimental painting app that translates your painting into p5.js code in real time. Only desktop browsers are supported.</p>
       <p>Shortcuts: Ctrl/⌘ + X (Cut), Ctrl/⌘ + C (Copy), Ctrl/⌘ + V (Paste), Ctrl/⌘ + D (Duplicate), Ctrl/⌘ + Z (Undo), Ctrl/⌘ + ⇧ + Z (Redo), Ctrl/⌘ + A (Select All), Backspace (Remove Selection), Arrow Keys (Move Selection)</p>
       <p>To run your code, copy entire code in the text area, paste it in <a href="https://editor.p5js.org/" target="_blank">p5.js Web Editor</a>, and click the play button to see the result.</p>
     </div>
