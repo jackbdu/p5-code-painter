@@ -127,7 +127,7 @@ export default {
           evt.preventDefault();
           this.pcp.undo();
         } else if (evt.code === "KeyA") {
-          evt.preventDefault();
+          if (document.activeElement.id !== "editor") evt.preventDefault();
           this.pcp.selectAllGraphics();
         }
         // to be added later, must not be typing (aka, only do this when canvas is active, rather than text editor for instance)
@@ -250,6 +250,6 @@ export default {
           @mouseout="hideStrokeWeightSlider = true"
           @input="event => setStrokeWeight(event.target.value, 'strokeWeight')">
     </div>
-    <textarea ref="editor" id="editor">{{ code }}</textarea>
+    <textarea ref="editor" id="editor">function setup() {\n{{ code }}}</textarea>
   `,
 };
