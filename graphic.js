@@ -265,9 +265,9 @@ class Graphic {
       for (let i = 0; i < Object.keys(p).length / 2; i++) {
         let x = p[`x${i}`];
         let y = p[`y${i}`];
-        statement += `vertex(${x},${y});\n`;
+        statement += `  vertex(${x},${y});\n`;
       }
-      statement += `endShape();`;
+      statement += `  endShape();`;
     } else if (this.type.includes("bezier")) {
       if (Object.keys(p).length > 0) {
         statement = `bezier(`;
