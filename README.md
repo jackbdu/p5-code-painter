@@ -4,6 +4,9 @@
 
 A web-based experimental painting app that translates your painting into p5.js code in real time.
 
+![](assets/20241119-p5js-code-painter-demo-pink-and-darkgray.png)
+![](assets/20241119-p5js-code-painter-demo-pink-and-darkgray-in-p5js-web-editor.png)
+
 ## Video Demos
 
 ![](assets/20230706-p5-code-painter-switch-to-vuejs-es-module-repeated-avocados-512x512@15fps.gif)
